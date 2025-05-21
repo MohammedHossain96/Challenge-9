@@ -47,12 +47,16 @@ class WeatherService {
   }
 
   private destructureLocationData(locationData: Coordinates): Coordinates {
-    return {
-      lat: locationData.lat,
-      lon: locationData.lon,
-      name: locationData.name
+    if (!locationData){
+      throw new Error('Location data is not found');}
+    const {name, lat, lon,} = locationData;
+      const coordinates: Coordinates = {
+       name,
+       lat,
+       lon,
+       
     };
-  }
+  return coordinates;}
 
   private buildGeocodeQuery(city: string): string {
     console.log(this.apiKey, "api keyyyyy")
