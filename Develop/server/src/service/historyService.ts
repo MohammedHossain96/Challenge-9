@@ -21,7 +21,7 @@ class HistoryService {
     const __dirname = path.dirname(__filename);
     
     // Define the path to the searchHistory.json file
-    this.historyFilePath = path.resolve(__dirname, '../../data/searchHistory.json');
+    this.historyFilePath = path.resolve(__dirname, '../../db/db.json');
   }
   // TODO: Define a read method that reads from the searchHistory.json file
   private async read(): Promise<City[]> {

@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config();
+// dotenv.config();
 
 
 import fetch from 'node-fetch';
@@ -27,7 +27,7 @@ interface Weather {
 
 
 class WeatherService {
-  private baseURL: string = 'https://api.openweathermap.org/data/2.5/';
+  private baseURL: string = 'https://api.openweathermap.org/';
   private apiKey: string = process.env.API_KEY || '';
   private city: string = ''
 
@@ -56,11 +56,11 @@ class WeatherService {
 
   private buildGeocodeQuery(city: string): string {
     console.log(this.apiKey, "api keyyyyy")
-    return `${this.baseURL}weather?q=${city}&appid=${this.apiKey}&units=imperial`;
+    return `${this.baseURL}geo/1.0/direct?q=${city}&appid=${this.apiKey}&units=imperial`;
   }
 
   private buildWeatherQuery(coordinates: Coordinates): string {
-    return `${this.baseURL}forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${this.apiKey}&units=imperial`;
+    return `${this.baseURL}data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${this.apiKey}&units=imperial`;
   }
   private async fetchAndDestructureLocationData(): Promise<Coordinates> {
     // console.log(this.city, 'in fetch funciton')
@@ -140,7 +140,7 @@ class WeatherService {
       console.log('sup daddy 3')
       const coordinates = await this.fetchAndDestructureLocationData();
       console.log('sup daddy 4')
-      // console.log(coordinates, "coordinates=================");
+      console.log(coordinates, "coordinates=================");
       const weatherData = await this.fetchWeatherData(coordinates);
       console.log(weatherData, "weather D =======================");
       // return this.parseCurrentWeather(weatherData);
